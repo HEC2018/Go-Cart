@@ -1,8 +1,7 @@
-# Shopify_challenge_Fall_2021
-### Shopify Fall 2021 Back-end Developer / Data Developer Intern Challenge Question (image repo)
-### Created by Xinhai Wei. (x67wei@uwaterloo.ca)
+# Go-Cart
+### Created by Hector(Xinhai) Wei (hectorweica@gmail.com) and Meredith(Xinru) Cheng (x59cheng@uwaterloo.ca)
 
-In this project, I designed a creative image repository, with the functionality of purchasing products and putting up new products.
+In this project, We designed a creative image repository, with the functionality of purchasing products and putting up new products.
 
 ## How I built it
 
@@ -18,7 +17,7 @@ For the frontend, I mainly uses HTML5 with Bootstrap 5.0 for our clear and easy-
 Requirements: Python3( Packages: Flask, sqlite3, werkzeug )
 First,
 
-    $ git clone https://github.com/HEC2018/Shopify_challenge_Fall_2021.git
+    $ git clone https://github.com/HEC2018/Go-Cart.git
 
 To run this application, run `python3 server.py` from the command line, which will create the database tables and start the Flask server automatically.
 
