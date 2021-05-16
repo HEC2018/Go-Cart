@@ -1,6 +1,6 @@
 # Go-Cart
 ### Created by:
-### Hector(Xinhai) Wei (hectorweica@gmail.com) and Meredith(Xinru) Cheng (x59cheng@uwaterloo.ca)
+### [Hector(Xinhai) Wei](https://www.linkedin.com/in/hector-xinhai-wei-9993841a0/) and [Meredith(Xinru) Cheng](https://www.linkedin.com/in/meredith-cheng/)
 
 In this project, We designed a creative image repository, with the functionality of purchasing products and putting up new products.
 
