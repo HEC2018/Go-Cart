@@ -1,16 +1,42 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for,session
+from flask_login import LoginManager,UserMixin,login_user,login_required
 import sqlite3 as sql
 import os
 from werkzeug.utils import secure_filename
 
 from flask.globals import current_app
 #import imghdr
+login_manager = LoginManager()
+login_manager.login_view = ""
 app = Flask(__name__)
+app.secret_key = "super secret key"
+
+User = {} 
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 app.config['UPLOAD_PATH'] = 'images/'
-
+app.config['SESSION_TYPE'] = 'filesystem'
 # restrict extensions for security
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif','.jpeg']
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    user = UserMixin()
+    user.id = "admin"
+    #User[user] = 1
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != '123':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            #session['username'] = request.form['username']
+            #session.add(user)
+            login_user(user)
+            return redirect(url_for('home_page'))
+    return render_template('login.html', error=error)
 
 # database cursor
 def get_cursor():
@@ -47,8 +73,13 @@ def initialize_db_clear():
     conn.commit()
     print("All cleared")
 
+@app.route('/')
+def index():
+    return redirect(url_for('login'))
+
 # Home_page 
-@app.route("/")
+@app.route("/home")
+#@login_required
 def home_page():
     (cur, _) = get_cursor()
     cur.execute("SELECT rowid, * FROM products")
@@ -75,6 +106,7 @@ def home_page():
 
 # Purchase button on main page
 @app.route("/buy/<product_id>")
+#@login_required
 def buy(product_id):
     # Try purchasing nothing. Invalid
     if not product_id:
@@ -104,17 +136,20 @@ def buy(product_id):
 
 # Clear all button on main page
 @app.route('/clear_all')
+#@login_required
 def clear():
     initialize_db_clear()
     return render_template("message.html", message="Clear all images inventory. Back to the main stage")
 
 # Upload button on main page
 @app.route('/upload')
+#@login_required
 def upload():
     return render_template("upload.html")
 
 # Upload functionalities for upload page
 @app.route('/upload', methods=['POST'])
+#@login_required
 def upload_file():
     # Obtain info from an HTTP request
     uploaded_file = request.files['file']
@@ -142,14 +177,16 @@ def upload_file():
                 (cur, conn) = get_cursor()
                 cur.execute("INSERT INTO products (name, imgpath, price, stock) VALUES (?,?,?,?)" , (filename.split(".")[0], image_path, price, quantity))
                 conn.commit()
-    return redirect(url_for('upload'))
+    return redirect(url_for('home_page'))
 
 # Reset button on the main page
 @app.route("/reset")
+#@login_required
 def reset():
     initialize_db()
     return render_template("message.html", message="Database reset. Page back to Initial stage")
 
 if __name__ == '__main__':
     initialize_db()
+    login_manager.init_app(app)
     app.run(debug = True)
