@@ -15,14 +15,14 @@ For the recommendataion engine, we choosed Auto-encoder from Neural Networks for
 
 For the frontend, we mainly uses HTML5 with Bootstrap 5.0 for our clear and easy-understanding user interface. Using such technologies also provides a strong cross-browser and multi-platform compatibility. _Flask_'s render_template function is used for updating data from past transactions. For the current stage, we automatically change every submitted image to 256x256 pixels because of the website's capacity. we also have built a file-upload page which make a good use of the form component of Bootstrap. Besides, a message website is included to remind the user if a purchase of product is successful or not. The message webisite uses an alert component which makes user have a better sense to the new transaction.
 
-## Features (under construction)
-Admin-Control
-Duplicate-Check
-Recommendation Engine(Auto-encoder)
-Multiplatform Compatibility
-Secure Upload
+## Features   
+Admin-Control  
+Duplicate-Check  
+Recommendation Engine(Auto-encoder)  
+Multiplatform Compatibility  
+Secure Upload  
 
-## Usage (under construction)
+## Usage  
 
 
 Requirements: Python3( Packages: Flask, sqlite3, werkzeug )
@@ -41,7 +41,7 @@ check the inventory whether there are enough image stock remains, and recorded t
 
 A small design for user is a navigation bar that shows how much the images that a customer has purchased on this website. The number is showed on the right side of the bar on top, counted in rounded dollars. 
 
-## Test guides (under construction)
+## Test guides  
 
 For testing purposes, the "tests" directory contains some pictures that can be used to put up as test. Testers can try to upload these pictures one by one with different prices or multiple of them with same price. After uploading, testers can first verify the new rows that put up on the website, representing the new added images, ensuring them with correct price and quantity. For adding some past existed images, testers shall validate the new quantity/stock of them. After uploading, testers can try to purchase some of images (a combination of sample images from server or new added images) and see the total value of images.
 
